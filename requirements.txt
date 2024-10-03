@@ -1,0 +1,5 @@
+ollama
+langchain
+pandas
+tiktoken
+huggingface_hub

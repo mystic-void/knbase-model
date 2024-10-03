@@ -102,8 +102,9 @@ template=prompt_template, input_variables=['answer', 'url']
 
 # цепочка с кастомным промтом
 chain = LLMChain(
-llm=OpenAI(temperature=0, openai_api_key=openai_api_key, max_tokens=500),
-prompt=PROMPT)
+  llm=OpenAI(temperature=0, openai_api_key=openai_api_key, max_tokens=500),
+  prompt=PROMPT
+)
 
 relevants = db.similarity_search('не знаю как прикрепить сотрудника')
 doc = relevants[0].dict()['metadata']
@@ -115,11 +116,11 @@ from langchain import HuggingFaceHub
 
 #подключение по API huggingface
 alpaca_chain = LLMChain(
-prompt=PROMPT,
-llm=HuggingFaceHub(repo_id='IlyaGusev/fred_t5_ru_turbo_alpaca',
-                    huggingfacehub_api_token=YOUR_API_KEY,
-                    model_kwargs={'temperature':0, 'max_length':128}
-                    )
+  prompt=PROMPT,
+  llm=HuggingFaceHub(repo_id='IlyaGusev/fred_t5_ru_turbo_alpaca',
+    huggingfacehub_api_token=YOUR_API_KEY,
+    model_kwargs={'temperature':0, 'max_length':128}
+    )
 )
 
 alpaca_chain.run(doc)

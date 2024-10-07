@@ -1,5 +1,6 @@
-ollama
+faiss-cpu
 langchain
+langchain_community
 pandas
 tiktoken
 huggingface_hub

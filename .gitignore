@@ -1,2 +1,2 @@
-ollama
-.pyc
+__pycache__/
+**/*.pyc

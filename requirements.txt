@@ -1,5 +1,6 @@
 faiss-cpu
 langchain
+langchain-ollama
 langchain_community
 pandas
 tiktoken

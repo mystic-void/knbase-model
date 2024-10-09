@@ -1,5 +1,5 @@
 from typing import List, Dict
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import OllamaEmbeddings
 import requests
 import json
 

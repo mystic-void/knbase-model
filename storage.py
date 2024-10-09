@@ -56,6 +56,10 @@ class VectorStore():
     self.store.save_local(self.name)
     # Подготовка к запросам
     self.store.as_retriever()
+
+  def as_retriever(self):
+    return self.store.as_retriever()
+
     
 
 if __name__ == "__main__":
@@ -64,7 +68,6 @@ if __name__ == "__main__":
   
   model = LLM(model="llama3.2:3b", host="127.0.0.1", port=11434)
   db = VectorStore(embedding_model=model.get_embeding_model())
-  
   
   # Добавление 1 части вопросов и поиск
   db.add(docs=df1, index_col="question")

@@ -8,6 +8,7 @@ class LLM():
     """ Класс-обертка для запуска локальных моделей """
     # Модели: llama3.2:3b или llama3.2:1b и mxbai-embed-large
     # todo добавить бд и индексацию (возможно)
+    # Добавлять изображения можно добавив в json поле "images": List[Base64]
     
     def __init__(self, host: str, port: int|str, model: str, stream: bool=False) -> None:
         self.model = model
@@ -15,17 +16,17 @@ class LLM():
         self.port = port
         self.stream = stream
     
-    def generate(self, promt: str):
+    def generate(self, promt: str, images: List[str], **params):
         """ Ответ одним сообщением (ответ) """
-        json_data={"model": self.model, "prompt": promt, "stream": self.stream}
+        json_data={"model": self.model, "prompt": promt, "stream": self.stream, "images": images, **params}
         data = self.send(json_data, path="generate")
         return json.loads(data.text)["response"]
     
-    def chat(self, messages: List[Dict]):
+    def chat(self, messages: List[Dict], images: List[str], **params):
         """ Ответ на основе множества сообщений (чат) 
         - messages: пример сообщения [{"role": "user", "content": "question"}]
         """
-        json_data={"model": self.model, "messages": messages, "stream": self.stream}
+        json_data={"model": self.model, "messages": messages, "stream": self.stream, "images": images, **params}
         data = self.send(json_data, path="chat")
         return json.loads(data.text)["message"]["content"]
     

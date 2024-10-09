@@ -27,9 +27,9 @@ class VectorStore():
   
   def __init__(self, embedding_model, path=None, name="VectorStore") -> None:
     self.embedding_model = embedding_model
-    self.load_storage(path)
-    self.name = name
     self.is_loaded = False
+    self.name = name
+    self.load_storage(path)
 
   def load_storage(self, path):
       if path is not None and os.path.exists(path):
@@ -46,7 +46,7 @@ class VectorStore():
     
     embeddings = self.embedding_model # задаем векторайзер
 
-    # Создаем хранилище
+    # Создаем хранилище, если оно не загружено
     if not self.is_loaded:
       self.store = FAISS.from_documents(texts, embeddings)
     else:
